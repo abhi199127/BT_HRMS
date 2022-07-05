@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="028e7978-c9e0-4a89-9c70-346116366cb1" name="Django default Mapping">
+      <data-sources db="f09150fc-101e-4f94-bc5b-78e669ca6934" ddl="99a6fb7d-534c-4782-98f5-596e31278a42" />
+      <scope>
+        <node kind="database" qname="@">
+          <node kind="schema" qname="@" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="99a6fb7d-534c-4782-98f5-596e31278a42" />
+          <option name="name" value="Django default (DDL)" />
+          <option name="languageId" value="MySQL" />
+          <option name="urls">
+            <array />
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
