@@ -1,0 +1,160 @@
+{% extends 'hrms/layout.html' %}
+{% load static %}
+{% block title %} All Employees | ITSC-HRMS {% endblock title %}
+      <!--  MAIN BODY START HERE -->
+          {% block content %}
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="row">
+            
+            <div class="col-lg-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                   
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <p id="date"></p>Birthdays
+                        <script>
+                          function run() {
+                              document.getElementById("srt").value = document.getElementById("Ultra").value;
+                          }
+                      </script>
+                        <select id="Ultra" onchange="run()">  <!--Call run() function-->
+                           <option value="">--Month--</option>
+                          <option value="1">January</option>
+                          <option value="2">February</option>
+                          <option value="3">March</option>
+                          <option value="4">April</option>
+                          <option value="5">May</option>
+                          <option value="6">June</option>
+                          <option value="7" selected="selected">July</option>
+                          <option value="8">August</option>
+                          <option value="9">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                      </select><br><br>
+                      TextBox1<br>
+                      
+                      {% if employee.dob.month == str.value %}
+                      {% for employee in employees  %}
+                      {{ datetime.now }}
+                      
+
+                      
+                        <tr>
+
+                          <td class="font-weight-medium">
+                            <img src="{{employee.thumb.url}}" class='rounded img-fluid' alt="">
+                          </td>
+                          <td>
+                            {{employee.first_name}}
+                          </td>
+                          <td>
+                            {{employee.last_name}}
+                          </td>
+                          <td>
+                           {{employee.mobile}}
+                          </td>
+                          <td class="text-danger"> 
+                            {{employee.email}}
+                          </td>
+                          <td>
+                             Date {{employee.dob}}
+                          </td>
+                        
+                        </tr>
+                        
+                        {% endfor %}
+                        {% endif %}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <p id="date"></p>Anniversary
+                        <script>
+                            window.onload = function() {
+                                var months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];;
+                                var date = new Date();
+
+                                document.getElementById('date').innerHTML = months[date.getMonth()];
+                            };   
+
+                            var e = document.getElementById("ddlViewBy");
+                            var strUser = e.value;
+                            //Would make strUser be 2. If what you actually want is test2, then do this:
+
+                            var e = document.getElementById("ddlViewBy");
+                            var strUser = e.options[e.selectedIndex].text;                
+                        </script>
+
+                        <select id="ddlViewBy">
+                          <option value="">--Month--</option>
+                          <option value="1">January</option>
+                          <option value="2">February</option>
+                          <option value="3">March</option>
+                          <option value="4">April</option>
+                          <option value="5">May</option>
+                          <option value="6">June</option>
+                          <option value="7" selected="selected">July</option>
+                          <option value="8">August</option>
+                          <option value="9">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                        </select>
+                        <div id="ddlViewBy"></div>
+                      {% for employee in employees  %}
+                      {% if employee.joined.month == 6 %}
+                      {{datetime.now}}
+                        <tr>
+                          <td class="font-weight-medium">
+                            <img src="{{employee.thumb.url}}" class='rounded img-fluid' alt="">
+                          </td>
+                          <td>
+                            {{employee.first_name}}
+                          </td>
+                          <td>
+                            {{employee.last_name}}
+                          </td>
+                          <td>
+                           {{employee.mobile}}
+                          </td>
+                          <td class="text-danger"> 
+                            {{employee.email}}
+                          </td>
+                          <td>
+                             Date {{employee.joined.day}} {{ date("M/D/Y") }}
+                          </td>
+                        
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+
+                   
+                
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        {% block noty %}
+        <script>
+          {% if messages %}
+            {% for message in messages  %}
+              toastr.success('{{message}}')
+            {% endfor %}
+          {% endif %}
+        </script>
+        {% endblock noty %}
+        {% endblock content %}
