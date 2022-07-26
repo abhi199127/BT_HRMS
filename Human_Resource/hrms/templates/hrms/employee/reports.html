@@ -1,0 +1,162 @@
+{% extends 'hrms/layout.html' %}
+{% load static %}
+{% block title %} All Employees | ITSC-HRMS {% endblock title %}
+      <!--  MAIN BODY START HERE -->
+          {% block content %}
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="row">
+            
+            <div class="col-lg-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                   
+                  <div class="table-responsive">
+					                
+
+
+                    <table class="table table-bordered" id="results1">
+                      <tbody>
+                      Birthdays
+					  <select id="Dateofbirth" oninput="filterTable()">
+						  <option>All</option>
+						  <option value="1">JANUARY</option>
+						  <option value="2">FEBRUARY</option>
+						  <option value="3">MARCH</option>
+						  <option  value="4">APRIL</option>
+						  <option value="5">MAY</option>
+						  <option value="6">JUNE</option>
+						  <option value="7">JULY</option>
+						  <option value="8">AUGUST</option>
+						  <option value="9">SEPTEMBER</option>
+						  <option value="10">OCTOBER</option>
+						  <option value="11">NOVEMBER</option>
+						  <option value="12">DECEMBER</option>
+					</select>
+                      {% for employee in employees  %}
+                       
+                        <tr>
+
+                          <td class="font-weight-medium">
+                            <img src="{{employee.thumb.url}}" class='rounded img-fluid' alt="">
+                          </td>
+                          <td>
+                            {{employee.first_name}} {{employee.last_name}}
+                          </td>
+                         
+                          <td>
+                           {{employee.mobile}}
+                          </td>
+                          <td class="text-danger"> 
+                            {{employee.email}}
+                          </td>
+						  <td style="display:none;">{{ employee.dob.month }}</td>
+                          <td>
+                            {{employee.dob.date}} 
+                          </td>
+						  <!--<td>{{ employee.dob }}</td>-->
+
+
+                        
+                        </tr>
+                            
+                        {% endfor %}
+                    
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="results">
+                      <tbody>
+                        Anniversary
+
+                      {% for employee in employees  %}
+                      
+                        <tr>
+                          <td class="font-weight-medium">
+                            <img src="{{employee.thumb.url}}" class='rounded img-fluid' alt="">
+                          </td>
+                          <td>
+                            {{employee.first_name}} {{employee.last_name}}
+                          </td>
+                          
+                          <td>
+                           {{employee.mobile}}
+                          </td>
+                          <td class="text-danger"> 
+                            {{employee.email}}
+                          </td>
+
+
+                          <td>
+                             Date {{employee.joined.year}} , <span class="text-danger">0 Years</span>
+                              <input type="hidden" class="something" id="box" value="{{employee.joined.year}}">
+                              <input type="hidden" class="dooj" id="year" value="2022">
+                              <div id="results" class="rees"></div>
+                          <script>
+                              var list = document.getElementsByClassName("something");
+                              for (var i = 0; i < list.length; i++) {
+                                 list[i].id = "box" + (i + 1);
+                              }
+                              var list = document.getElementsByClassName("dooj");
+                              for (var i = 0; i < list.length; i++) {
+                                list[i].id = "year" + (i + 1);
+                              }
+                              var list = document.getElementsByClassName("rees");
+                              for (var i = 0; i < list.length; i++) {
+                                list[i].id = "results" + (i + 1);
+                              }
+                              //alert(year5);
+                              
+                            </script>
+
+                      
+                              </td>
+                        
+                        </tr>
+                        
+                        {% endfor %}
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
+        {% block noty %}
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+			
+		  
+					function filterTable() {
+				  // Variables
+				  //alert('hhh');
+				  let dropdown, table, rows, cells, Dob, filter;
+				  dropdown = document.getElementById("Dateofbirth");
+				  table = document.getElementById("results1");
+				  rows = table.getElementsByTagName("tr");
+				  filter = dropdown.value;
+
+				  // Loops through rows and hides those with countries that don't match the filter
+				  for (let row of rows) { // `for...of` loops through the NodeList
+					cells = row.getElementsByTagName("td");
+					Dob = cells[4] || null; // gets the 2nd `td` or nothing
+					// if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+					if (filter === "All" || !Dob || (filter === Dob.textContent)) {
+					  row.style.display = ""; // shows this row
+					}
+					else {
+					  row.style.display = "none"; // hides this row
+					}
+				  }
+				}
+        </script>
+        {% endblock noty %}
+        {% endblock content %}
